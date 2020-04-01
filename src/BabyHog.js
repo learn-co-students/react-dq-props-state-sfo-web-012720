@@ -11,10 +11,22 @@ import GlowingBaby from './assets/glowing-eyes.png'
 export default class BabyHog extends Component {
 
   constructor(props) {
-    super(props)
+    super(props)         
+
+    this.state = {
+      weight: 0
+    }
   }
 
-  changeWeight = (e) => {
+// Eye color example
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     eyeColor: "blue",
+  //   }
+  // }
+
+  changeWeight = (e) => {    
     // nothing needs to change here
     const newWeight = e.target.name === "+" ? (this.state.weight + 10) : (this.state.weight - 10)
     this.setState({
@@ -25,20 +37,30 @@ export default class BabyHog extends Component {
   render() {
     return (
       <li className="hogbabies">
-        <h1>Name</h1>
-        <h3>Weight:</h3>
-        <h3>Hobby:</h3>
-        <h4>Eye Color:</h4>
+        <h1>Name: {this.props.hog.name} </h1>
+        <h3>Weight: {this.state.weight}</h3>
+        <h3>Hobby:{this.props.hog.hobby}</h3>
+        <h4>Eye Color:{this.props.eyeColor}</h4>
           
-        <Button name="+">
+        <Button 
+        name="+"
+        onClick={this.changeWeight}
+        >
           Increase Weight
         </Button>
-        <Button name="-">
+        <Button 
+        name="-"
+        onClick={this.changeWeight}
+        >
           Decrease Weight
         </Button>
 
+        {/* <img src={normalBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" /> */}
         <div className="hb-wrap">
-          <img src={normalBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" />
+          {this.props.eyeColor === "blue" ? (<img src={BlueBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" />) :
+          this.props.eyeColor === "sun" ? (<img src={SunBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" />) :
+          this.props.eyeColor === "glowing" ? (<img src={GlowingBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" />):
+                                          <img src={normalBaby} style={{height: '200px'}} alt="MasterBlasterJrJr" /> }
         </div>
         
       </li>
